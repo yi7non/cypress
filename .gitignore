@@ -1,0 +1,13 @@
+# Ignore paths that contain user-generated content.
+# Ignore IDE's configuration files
+.idea
+robots.txt
+.vscode
+
+#Ignor cypress 
+testings/node_modules
+testings/node_modules/*
+testings/node_modules/*/*
+testings/cypress/screenshots
+testings/cypress/screenshots/*
+testings/cypress/screenshots/*/*
