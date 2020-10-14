@@ -5,39 +5,12 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 const sites = [
+
     {
-        url: 'https://tauweb-test.tau.ac.il',
-        mobile: {
-            searchvalue: '-test',
-            newvalue: '-test.m'
-        }
-    },
-    {
-        url: 'https://english-test.tau.ac.il',
-        mobile: {
-            searchvalue: '-test',
-            newvalue: '-test.m'
-        }
-    },
-    {
-        url: 'http://socsci-test.tau.ac.il',
+        url: 'https://socsci-test.tau.ac.il',
         mobile: {
             searchvalue: 'socsci-test.tau.ac.il',
             newvalue: 'social-sciences-test.m.tau.ac.il'
-        }
-    },
-    {
-        url: 'https://rishum-test.tau.ac.il',
-        mobile: {
-            searchvalue: '-test',
-            newvalue: '-test.m'
-        }
-    },
-    {
-        url: 'https://international-test.tau.ac.il',
-        mobile: {
-            searchvalue: '-test',
-            newvalue: '-test.m'
         }
     },
     {
@@ -47,20 +20,7 @@ const sites = [
             newvalue: 'en-social-sciences-test.m.tau.ac.il'
         }
     },
-    {
-        url: 'http://engineering-test.tau.ac.il',
-        mobile: {
-            searchvalue: 'engineering-test.tau.ac.il',
-            newvalue: 'engineering-english-test.tau.ac.il'
-        }
-    },
-    {
-        url: 'http://international-test.tau.ac.il',
-        mobile: {
-            searchvalue: '-test',
-            newvalue: '-test.m'
-        }
-    }
+
 ]
 
 const contentTypes = [
@@ -86,10 +46,7 @@ describe('get screenshots', () => {
         contentTypes.forEach(contentType => {
 
             it(`${ siteName(site.url) }-${ contentType }`, () => {
-
-                cy.login(site.url)
                 cy.reducer(site, contentType) 
-                
             })
 
         })

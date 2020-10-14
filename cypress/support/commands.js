@@ -14,6 +14,15 @@ Cypress.Commands.add('login', (domain ,time = 0) => {
 
 
 
+// logout function
+Cypress.Commands.add('logout', () => {
+    
+    cy.get('#admin-menu-account > li:nth-child(1) > a').click()
+
+})
+
+
+
 // reducer function
 Cypress.Commands.add('reducer', (site, contentType) => {
 
@@ -26,6 +35,7 @@ Cypress.Commands.add('reducer', (site, contentType) => {
             cy.academicUnitsViewScreenshot(site)
             break
         default:
+            cy.login(site.url)
             cy.visit(`${ site.url }/admin/content`)
             cy.filterContentType(contentType)
             cy.contentTypeScreenshot(site, contentType)
@@ -56,7 +66,7 @@ Cypress.Commands.add('filterContentType', (contentType) => {
 Cypress.Commands.add('frontPageScreenshot', site => {
     
     const siteName = getSiteNameFromUrl(site.url)
-    cy.visit(site.url).screenshot(`${ siteName }/front-page`)
+    cy.visit(site.url).screenshot(`${ siteName }-front-page`)
     cy.mobileScreenshot(site, 'front-page')
 
 })
@@ -67,7 +77,7 @@ Cypress.Commands.add('frontPageScreenshot', site => {
 Cypress.Commands.add('academicUnitsViewScreenshot', site => {
 
     const siteName = getSiteNameFromUrl(site.url)
-    cy.visit(`${ site.url }/academic-units-view`).screenshot(`${ siteName }/academic-units-view`)
+    cy.visit(`${ site.url }/academic-units-view`).screenshot(`${ siteName }-academic-units-view`)
     cy.mobileScreenshot(site, 'academic-units-view')
 
 })
@@ -89,10 +99,12 @@ Cypress.Commands.add('contentTypeScreenshot', (site, contentType) => {
             })
 
     }).then(() => {
-        cy.visit(site.url + path).screenshot(`${ siteName }/${ contentType }_01`)
-        cy.mobileScreenshot(site, `${ path }_01`)
+        cy.logout()
+        cy.visit(site.url + path).screenshot(`${ siteName }-${ contentType }_01`)
+        cy.mobileScreenshot(site, `${ path }_01`, contentType)
     })
 
+    cy.login(site.url)
     cy.visit(`${ site.url }/admin/content`) 
     cy.filterContentType(contentType)
 
@@ -105,8 +117,9 @@ Cypress.Commands.add('contentTypeScreenshot', (site, contentType) => {
             })
 
     }).then(() => {
-        cy.visit(site.url + path).screenshot(`${ siteName }/${ contentType }_02`)
-        cy.mobileScreenshot(site, `${ path }_02`)
+        cy.logout()
+        cy.visit(site.url + path).screenshot(`${ siteName }-${ contentType }_02`)
+        cy.mobileScreenshot(site, `${ path }_02`, contentType)
     })
 
 })
@@ -114,7 +127,7 @@ Cypress.Commands.add('contentTypeScreenshot', (site, contentType) => {
 
 
 // mobileScreenshot
-Cypress.Commands.add('mobileScreenshot', (site, path) => {
+Cypress.Commands.add('mobileScreenshot', (site, path, contentType) => {
 
     let visitPath
     if (path === 'front-page') {
@@ -126,6 +139,6 @@ Cypress.Commands.add('mobileScreenshot', (site, path) => {
     const siteName = getSiteNameFromUrl(mobileURL(site))
     cy.visit(`${ mobileURL(site) }/${ visitPath }`)
     cy.viewport('iphone-x')
-    cy.screenshot(`${ siteName }/${ path }`)
-
+    cy.screenshot(`${ siteName }-${ path.replace(visitPath, contentType) }`)
+    cy.viewport(1585, 660)
 })

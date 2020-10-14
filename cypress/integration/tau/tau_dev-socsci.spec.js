@@ -5,58 +5,15 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 const sites = [
-
-    {
-        url: 'http://main.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
-    {
-        url: 'http://tau-en.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
     {
         url: 'http://socsci.taudev.tau.ac.il',
         mobile: {
             searchvalue: 'taudev.tau',
             newvalue: 'm.taudev.tau'
         }
-    },
-    {
-        url: 'http://register.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
-    {
-        url: 'http://international.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
+    }, 
     {
         url: 'http://socsci-en.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
-    {
-        url: 'http://eng-en.taudev.tau.ac.il',
-        mobile: {
-            searchvalue: 'taudev.tau',
-            newvalue: 'm.taudev.tau'
-        }
-    },
-    {
-        url: 'http://eng.taudev.tau.ac.il',
         mobile: {
             searchvalue: 'taudev.tau',
             newvalue: 'm.taudev.tau'
@@ -87,10 +44,7 @@ describe('get screenshots', () => {
         contentTypes.forEach(contentType => {
 
             it(`${ siteName(site.url) }-${ contentType }`, () => {
-
-                cy.login(site.url)
                 cy.reducer(site, contentType) 
-                
             })
 
         })

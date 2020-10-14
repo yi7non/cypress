@@ -1,1 +1,4 @@
-{}
+{
+    "pageLoadTimeout": 100000,
+    "viewportWidth": 1585
+}

@@ -5,9 +5,10 @@ robots.txt
 .vscode
 
 #Ignor cypress 
-testings/node_modules
-testings/node_modules/*
-testings/node_modules/*/*
-testings/cypress/screenshots
-testings/cypress/screenshots/*
-testings/cypress/screenshots/*/*
+automation/node_modules
+automation/node_modules/*
+automation/node_modules/*/*
+automation/cypress/screenshots
+automation/cypress/screenshots/*
+automation/cypress/screenshots/*/*
+node_modules
